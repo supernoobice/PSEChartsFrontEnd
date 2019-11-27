@@ -1,12 +1,9 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 
 class Home extends React.Component {
     render () {
-        return (
-            <div>
-                <h1 className="display-1">Home</h1>
-            </div>
-        )
+        return <Redirect to="/stock/JFC" />
     }
 }
 

@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet"; // title
 import TimeFrame from "./Stock/TimeFrame";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import ChartInit from "./Chart/ChartInit";
+import Financials from "./Stock/Financials";
 
 class App extends React.Component {
   state = {
@@ -27,7 +28,11 @@ class App extends React.Component {
     },
     chart: [],
     volume: [],
-    timeframe: ""
+    timeframe: "",
+    tooltip: "",
+    tooltipLabel : '',
+    fin_table : '',
+    kr_table: ''
   };
 
   getChart() {
@@ -61,7 +66,7 @@ class App extends React.Component {
 
   getLineSeries(chart) {
     let lineSeries = chart.addAreaSeries({
-      topColor: "rgba(0, 123, 255, 0.5)",
+      topColor: "rgba(0, 123, 255, 0.4)",
       bottomColor: "rgba(0, 123, 255, 0)",
       lineColor: "#007bff",
       lineWidth: 2
@@ -87,9 +92,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Component did mount");
     let chart = this.getChart();
-
     let lineSeries = this.getLineSeries(chart);
     let volumeSeries = this.getVolumeSeries(chart);
 
@@ -101,8 +104,9 @@ class App extends React.Component {
           this.props.match.params.symbol
       )
       .then(res => {
-        this.setState({ chart: res.data });
-        // console.log(res.data);
+        
+        this.setState({ chart: res.data.chart_data });
+        //console.log(res.data.chart_data);
         lineSeries.setData(this.state.chart);
       });
 
@@ -124,8 +128,23 @@ class App extends React.Component {
       .get(this.state.api + "stock.php?id=" + this.props.match.params.symbol)
       .then(res => {
         this.setState({ stock: res.data });
+        //console.log(res.data);
       });
+    
+    //  financials table
+    axios.get(this.state.api + 'financials.php?data=financials&id=' + this.props.match.params.symbol).then(res => {
+      console.log(res.data);
+      this.setState({ fin_table : res.data });
+    });
+
+    // key ratios table
+    axios.get(this.state.api + 'financials.php?data=kr&id=' + this.props.match.params.symbol).then(res => {
+      console.log(res.data);
+      this.setState({ kr_table : res.data });
+    });
   }
+
+
 
   /**
    * For x months timeframe chart data
@@ -138,6 +157,7 @@ class App extends React.Component {
     var lineSeries = this.getLineSeries(chart);
     var volumeSeries = this.getVolumeSeries(chart);
 
+    // chart data
     axios
       .get(
         this.state.api +
@@ -147,7 +167,7 @@ class App extends React.Component {
           months
       )
       .then(res => {
-        this.setState({ chart: res.data });
+        this.setState({ chart: res.data.chart_data, tooltip : res.data.returns, tooltipLabel : res.data.label });
         lineSeries.setData(this.state.chart);
         chart.timeScale().fitContent();
       });
@@ -166,6 +186,16 @@ class App extends React.Component {
         volumeSeries.setData(this.state.volume);
         //console.log(this.state);
       });
+
+    // get stock
+    axios
+      .get(this.state.api + "stock.php?id=" + this.props.match.params.symbol)
+      .then(res => {
+        this.setState({ stock: res.data });
+        // console.log(res.data);
+      });
+
+      
   }
 
   render() {
@@ -177,12 +207,12 @@ class App extends React.Component {
       <div className="container">
         <Helmet>
           <title>
-            {this.state.stock.symbol} {this.state.stock.name} PSECHARTS
+            {this.state.stock.symbol + " " + this.state.stock.name + " " + this.state.stock.change + "%"} PSECHARTS
           </title>
         </Helmet>
-        <div className="row">
+        <div className="row mb-4">
           <div className="col-md-12">
-            <div className="card m-4">
+            <div className="card mt-4">
               <div className="card-body">
                 <div>
                   <h1 className="card-title h4 m-0">{this.state.stock.name}</h1>
@@ -222,10 +252,18 @@ class App extends React.Component {
                   style={style}
                   symbol={this.props.match.params.symbol}
                   api={this.api}
+                  tooltip={this.state.tooltip}
+                  tooltipLabel={this.state.tooltipLabel}
                 />
                 <StockPriceData data={this.state.stock} />
+
+                
+                
+                
               </div>
             </div>
+            <Financials title="Financials" table={this.state.fin_table} />
+            <Financials title="Key Ratios" table={this.state.kr_table} />
           </div>
         </div>
       </div>
