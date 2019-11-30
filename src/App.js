@@ -9,10 +9,15 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import ChartInit from "./Chart/ChartInit";
 import Financials from "./Stock/Financials";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { InputGroup, FormControl } from 'react-bootstrap';
 import SearchResults from './Home/SearchResults';
 >>>>>>> Homepage
+=======
+import { InputGroup, FormControl } from 'react-bootstrap';
+import SearchResults from './Home/SearchResults';
+>>>>>>> Added a homepage
 
 class App extends React.Component {
   state = {
@@ -38,13 +43,19 @@ class App extends React.Component {
     tooltipLabel : '',
     fin_table : '',
 <<<<<<< HEAD
+<<<<<<< HEAD
     kr_table: ''
 =======
+=======
+>>>>>>> Added a homepage
     kr_table: '',
     searching : false,
     searchList : [],
     stocks : []
+<<<<<<< HEAD
 >>>>>>> Homepage
+=======
+>>>>>>> Added a homepage
   };
 
   getChart() {
@@ -141,29 +152,40 @@ class App extends React.Component {
       .then(res => {
         this.setState({ stock: res.data });
 <<<<<<< HEAD
+<<<<<<< HEAD
         //console.log(res.data);
 =======
         console.log(res.data);
 >>>>>>> Homepage
+=======
+        console.log(res.data);
+>>>>>>> Added a homepage
       });
     
     //  financials table
     axios.get(this.state.api + 'financials.php?data=financials&id=' + this.props.match.params.symbol).then(res => {
 <<<<<<< HEAD
+<<<<<<< HEAD
       console.log(res.data);
 =======
       //console.log(res.data);
 >>>>>>> Homepage
+=======
+      //console.log(res.data);
+>>>>>>> Added a homepage
       this.setState({ fin_table : res.data });
     });
 
     // key ratios table
     axios.get(this.state.api + 'financials.php?data=kr&id=' + this.props.match.params.symbol).then(res => {
 <<<<<<< HEAD
+<<<<<<< HEAD
       console.log(res.data);
       this.setState({ kr_table : res.data });
     });
 =======
+=======
+>>>>>>> Added a homepage
       //console.log(res.data);
       this.setState({ kr_table : res.data });
     });
@@ -172,13 +194,19 @@ class App extends React.Component {
     axios.get(this.state.api + 'stocks.php').then(res => {
         this.setState({stocks : res.data});
     });
+<<<<<<< HEAD
 >>>>>>> Homepage
+=======
+>>>>>>> Added a homepage
   }
 
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> Added a homepage
   /**
    * Search handler
    * @param {*} event 
@@ -230,7 +258,10 @@ class App extends React.Component {
 
 
 
+<<<<<<< HEAD
 >>>>>>> Homepage
+=======
+>>>>>>> Added a homepage
   /**
    * For x months timeframe chart data
    */
@@ -296,7 +327,10 @@ class App extends React.Component {
           </title>
         </Helmet>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> Added a homepage
         <div className="row mt-4">
             <div className="col-md-12">
             <InputGroup size="lg">
@@ -305,7 +339,10 @@ class App extends React.Component {
             {this.state.searching ? <SearchResults stocks={this.state.searchList} /> : '' }
             </div>
         </div>
+<<<<<<< HEAD
 >>>>>>> Homepage
+=======
+>>>>>>> Added a homepage
         <div className="row mb-4">
           <div className="col-md-12">
             <div className="card mt-4">

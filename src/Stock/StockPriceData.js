@@ -6,7 +6,11 @@ const stockPricedata = (props) => {
     const borderstyle = ["table", "borderless"].join(" ");
     const tdstyle = ["text-right", "text-muted"].join(" ");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> Added a homepage
 
 >>>>>>> Homepage
 

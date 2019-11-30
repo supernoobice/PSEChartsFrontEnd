@@ -1,13 +1,19 @@
 import React from 'react';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {Redirect} from 'react-router-dom';
 =======
+=======
+>>>>>>> Added a homepage
 import axios from 'axios';
 import StockList from './StockList';
 import {InputGroup, FormControl} from 'react-bootstrap';
 import SearchResults from './SearchResults';
 import {Helmet} from 'react-helmet';
+<<<<<<< HEAD
 >>>>>>> Homepage
+=======
+>>>>>>> Added a homepage
 
 class Home extends React.Component {
     state = {
@@ -80,8 +86,11 @@ class Home extends React.Component {
 
     render () {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return <Redirect to="/stock/JFC" />
 =======
+=======
+>>>>>>> Added a homepage
 
         return (<div>
             <Helmet>
@@ -113,7 +122,10 @@ class Home extends React.Component {
             
             
         </div>);
+<<<<<<< HEAD
 >>>>>>> Homepage
+=======
+>>>>>>> Added a homepage
     }
 }
 

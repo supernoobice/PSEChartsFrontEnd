@@ -5,11 +5,14 @@ class ChartInit extends React.Component {
 
     render() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         const numberFormat = (value) => {
             return parseFloat(value).toFixed(2);
         }
 =======
 >>>>>>> Homepage
+=======
+>>>>>>> Added a homepage
 
         const container = {
             position: 'relative'
