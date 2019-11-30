@@ -37,4 +37,15 @@
 
 th.str, th.text2 {
   text-align: left !important;
+<<<<<<< HEAD
+=======
+}
+
+div.search:hover {
+  background: #EEE;
+}
+
+div.search {
+  border-radius: 3px;
+>>>>>>> Homepage
 }

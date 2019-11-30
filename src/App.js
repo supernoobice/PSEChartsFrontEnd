@@ -8,6 +8,11 @@ import TimeFrame from "./Stock/TimeFrame";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import ChartInit from "./Chart/ChartInit";
 import Financials from "./Stock/Financials";
+<<<<<<< HEAD
+=======
+import { InputGroup, FormControl } from 'react-bootstrap';
+import SearchResults from './Home/SearchResults';
+>>>>>>> Homepage
 
 class App extends React.Component {
   state = {
@@ -32,7 +37,14 @@ class App extends React.Component {
     tooltip: "",
     tooltipLabel : '',
     fin_table : '',
+<<<<<<< HEAD
     kr_table: ''
+=======
+    kr_table: '',
+    searching : false,
+    searchList : [],
+    stocks : []
+>>>>>>> Homepage
   };
 
   getChart() {
@@ -128,24 +140,97 @@ class App extends React.Component {
       .get(this.state.api + "stock.php?id=" + this.props.match.params.symbol)
       .then(res => {
         this.setState({ stock: res.data });
+<<<<<<< HEAD
         //console.log(res.data);
+=======
+        console.log(res.data);
+>>>>>>> Homepage
       });
     
     //  financials table
     axios.get(this.state.api + 'financials.php?data=financials&id=' + this.props.match.params.symbol).then(res => {
+<<<<<<< HEAD
       console.log(res.data);
+=======
+      //console.log(res.data);
+>>>>>>> Homepage
       this.setState({ fin_table : res.data });
     });
 
     // key ratios table
     axios.get(this.state.api + 'financials.php?data=kr&id=' + this.props.match.params.symbol).then(res => {
+<<<<<<< HEAD
       console.log(res.data);
       this.setState({ kr_table : res.data });
     });
+=======
+      //console.log(res.data);
+      this.setState({ kr_table : res.data });
+    });
+
+    // get all stocks
+    axios.get(this.state.api + 'stocks.php').then(res => {
+        this.setState({stocks : res.data});
+    });
+>>>>>>> Homepage
   }
 
 
 
+<<<<<<< HEAD
+=======
+  /**
+   * Search handler
+   * @param {*} event 
+   */
+  searchHandler(event) {
+    let query_string = event.target.value;
+    //console.log("QUERY STRING" , query_string);
+
+    if(!query_string) {
+        this.setState({searching : false, searchList : []});
+        return;
+    }
+    
+
+    // search using regex for Symbol
+    let matched_query = this.state.stocks.filter((stock) => {
+    var reg1 = '[a-zA-Z0-9]*';
+    var regex = new RegExp(query_string.toUpperCase() + reg1);
+    return stock.symbol.match(regex);
+    });
+
+    // search for stock name
+    let matched_query2 = this.state.stocks.filter((stock) => {
+    var reg1 = '[a-zA-Z0-9]*';
+    var regex = new RegExp(query_string.toUpperCase() + reg1);
+    return stock.name.toUpperCase().match(regex);
+    });
+
+    //console.log("REGEX FOUND: ", matched_query);
+
+    // combine the results
+    let joined_results = matched_query.concat(matched_query2);
+    
+    // remove the duplicates
+    let final_search_results = joined_results.filter( (item, index) => {
+    return joined_results.indexOf(item) === index
+    })
+
+    
+    // 3 levels deep of object works funky
+    
+    if(matched_query) {
+    this.setState({
+        searching : true,
+        searchList : final_search_results});
+    }
+}
+
+
+
+
+>>>>>>> Homepage
   /**
    * For x months timeframe chart data
    */
@@ -210,6 +295,17 @@ class App extends React.Component {
             {this.state.stock.symbol + " " + this.state.stock.name + " " + this.state.stock.change + "%"} PSECHARTS
           </title>
         </Helmet>
+<<<<<<< HEAD
+=======
+        <div className="row mt-4">
+            <div className="col-md-12">
+            <InputGroup size="lg">
+                <FormControl autoFocus value={this.state.searchQuery} onChange={ (e) => this.searchHandler(e)} className="shadow-sm" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Search for stocks..." />
+            </InputGroup>
+            {this.state.searching ? <SearchResults stocks={this.state.searchList} /> : '' }
+            </div>
+        </div>
+>>>>>>> Homepage
         <div className="row mb-4">
           <div className="col-md-12">
             <div className="card mt-4">

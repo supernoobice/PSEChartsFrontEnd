@@ -1,11 +1,15 @@
 import React from 'react';
+import {numberFormat} from '../Utils/Utils';
 
 class ChartInit extends React.Component {
 
     render() {
+<<<<<<< HEAD
         const numberFormat = (value) => {
             return parseFloat(value).toFixed(2);
         }
+=======
+>>>>>>> Homepage
 
         const container = {
             position: 'relative'

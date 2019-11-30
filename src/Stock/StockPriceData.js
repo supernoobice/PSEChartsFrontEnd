@@ -1,9 +1,14 @@
 import React from 'react';
 import './StockPriceData.css';
+import {abbreviateNumber} from '../Utils/Utils';
 
 const stockPricedata = (props) => {
     const borderstyle = ["table", "borderless"].join(" ");
     const tdstyle = ["text-right", "text-muted"].join(" ");
+<<<<<<< HEAD
+=======
+
+>>>>>>> Homepage
 
     
 
