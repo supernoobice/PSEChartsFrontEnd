@@ -21,3 +21,28 @@
   color: #09d3ac;
 }
 
+.table table {
+  font-size: 0.8rem;
+  width: 100%;
+  line-height: 2em;
+}
+
+.table thead {
+  text-align: right;
+}
+
+.table .hr, .table td, .table th {
+  padding: 0 !important;
+}
+
+th.str, th.text2 {
+  text-align: left !important;
+}
+
+div.search:hover {
+  background: #EEE;
+}
+
+div.search {
+  border-radius: 3px;
+}
